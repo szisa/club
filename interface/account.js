@@ -70,6 +70,9 @@ class Module extends App {
             }
             
             data.nickname = data.username;
+            data.clubId = '';
+            data.type = 0;
+            data.nickname = data.username;
             data.lastlogin = new Date().valueOf() / 1000;
             let sha256 = crypto.createHash('sha256');
             data.passwd = sha256.update(data.passwd + __salt).digest('hex');

@@ -11,15 +11,18 @@ let orm = {
     },
     logo: {
         type: db.STRING(500),
-        comment: 'logo图片地址'
+        comment: 'logo图片地址',
+        defaultValue: ''
     },
     icon: {
         type: db.STRING(500),
         comment: '徽标图片地址',
+        defaultValue: ''
     },
     page: {
         type: db.STRING(500),
         comment: '官网',
+        defaultValue: ''
     },
     type: {
         type: db.INTEGER,
@@ -28,26 +31,37 @@ let orm = {
     mp: {
         type: db.STRING(500),
         comment: '微信公众号',
+        defaultValue: ''
     },
     phone: {
         type: db.STRING(20),
         comment: '联系方式',
+        defaultValue: ''
     },
     webchat: {
         type: db.STRING(50),
         comment: '微信号',
+        defaultValue: ''
     },
     wGroup: {
         type: db.STRING(500),
         comment: '微信群',
+        defaultValue: ''
     },
     qGroup: {
         type: db.STRING(500),
         comment: 'Q群',
+        defaultValue: ''
     },
     desc: {
         type: db.TEXT,
         comment: '社团介绍',
+        allowNull: true
+    },
+    valid: {
+        type: db.BOOLEAN,
+        comment: '是否有效',
+        defaultValue: true
     }
 };
 let table_name = prefix + 'info';

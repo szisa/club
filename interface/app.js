@@ -90,8 +90,8 @@ class App {
     }
 
     // 通用新增接口
-    async new(data, Model, unique = null) {
-        let keys = Model.keys();
+    async new(data, Model, unique = null, keys = null) {
+        keys = keys || Model.keys();
         
         if (!App.haskeys(data, keys)) {
             throw (App.error.param);
@@ -103,6 +103,7 @@ class App {
             if (unique) {
                 let where = {};
                 where[unique] = data[unique];
+                where.valid = true;
                 let record = await Model.findOne({
                     where: where
                 });
@@ -124,7 +125,7 @@ class App {
     }
 
     // 通用更新接口
-    async set(data, Model, preUpdate = function () { }, unique = 'id') {
+    async set(data, Model, unique = 'id', preUpdate = null) {
         let keys = Model.keys();
         keys = ['id'].concat(keys).concat(['create_time', 'update_time']);
 
@@ -145,7 +146,7 @@ class App {
                 throw (App.error.existed(this.name, false));
             }
 
-            preUpdate(record);
+            if (preUpdate) record = preUpdate(record) || record;
 
             data[unique] = undefined;
             record = App.update(record, data, keys);

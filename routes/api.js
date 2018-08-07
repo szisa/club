@@ -17,6 +17,7 @@ router.all('*', function (req, res, next) {
 router.use(require('./access'));
 router.use('/lib', require('./lib'));
 router.use('/account', loader(modules.account));
+router.use('/club', loader(modules.club));
 
 router.get('/', function (req, res) {
     res.render('index', { title: 'API' });
