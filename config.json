@@ -1,0 +1,21 @@
+{
+    "base": {
+        "port": 8988,
+        "domain": "http://localhost:8988",
+        "cookie_domain": "localhost",
+        "suffix": ".htm",
+        "identityKey": "_CLUB_SESSION_ID_nc7OybdwJMBxLqkf",
+        "secret": "QHjPKsUgAoRYdtL3",
+        "salt": "c62b3e62-25bf-45ca-ab03-c6aa758ac4e9"
+    },
+    "error": {
+    },
+    "web": {
+        "name": "深信社团大熔炉"
+    },
+    "file": {
+        "upload": "/public/upload/",
+        "fileurl": "upload/",
+        "maxSize": 5
+    }
+}

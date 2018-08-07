@@ -1,0 +1,12 @@
+{
+    "db": {
+        "host": "sxisa.com",
+        "user": "club_db",
+        "password": "szisa_club_123456",
+        "database": "club",
+        "port": 3306,
+        "dialect": "mysql",
+        "prefix": "club_",
+        "logging": true
+    }
+}
