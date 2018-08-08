@@ -14,7 +14,7 @@ let orm = {
         comment: '联系方式',
         defaultValue: ''
     },
-    webchat: {
+    wechat: {
         type: db.STRING(50),
         comment: '微信号',
         defaultValue: ''
