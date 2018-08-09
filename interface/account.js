@@ -37,7 +37,8 @@ class Module extends App {
         try {
             let account = await this.exist(data.username, true);
             if(!account) {
-                account = await this.create(data, true);
+                throw this.error.verify;
+                // account = await this.create(data, true);
             } else {
                 let sha256 = crypto.createHash('sha256');
                 let passwd = sha256.update(data.passwd + __salt).digest('hex');
@@ -70,9 +71,9 @@ class Module extends App {
             }
             
             data.nickname = data.username;
-            data.clubId = '';
-            data.type = 0;
-            data.nickname = data.username;
+            data.clubId = data.clubId || '';
+            data.type = data.type || 0;
+            data.nickname = data.nickname || data.username;
             data.lastlogin = new Date().valueOf() / 1000;
             let sha256 = crypto.createHash('sha256');
             data.passwd = sha256.update(data.passwd + __salt).digest('hex');
@@ -92,15 +93,14 @@ class Module extends App {
             throw (this.error.param);
         }
 
-        data = App.filter(data, Account.keys());
+        data = App.filter(data, Account.keys().concat(['oldpasswd']));
 
         try {
-            let account = this.info(true);
+            let account = this.info(true, Account.keys());
             if (account.username != data.username) {
                 throw this.error.limited;
             }
             // 用户名不可更改
-            data.username = undefined;
             if (account.passwd) {
                 let sha256 = crypto.createHash('sha256');
                 let passwd = sha256.update(data.oldpasswd + __salt).digest('hex');
@@ -108,7 +108,7 @@ class Module extends App {
                     throw this.error.verify;
                 }
             }
-            return this.okupdate(await super.set(data, Account));
+            return this.okupdate(await super.set(data, Account, 'username'));
         } catch (err) {
             if (err.isdefine) throw (err);
             throw (this.error.db(err));
