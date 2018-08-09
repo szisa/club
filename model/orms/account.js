@@ -19,7 +19,7 @@ let orm = {
     },
     type: {
         type: db.INTEGER,
-        comment: '账号类型',
+        comment: '账号类型，0 = 未激活，1 = 管理员，2 = 社团号',
     },
     lastlogin: {
         type: db.INTEGER,
