@@ -107,8 +107,12 @@ class Module extends App {
                 if (account.passwd != passwd) {
                     throw this.error.verify;
                 }
+                sha256 = crypto.createHash('sha256');
+                data.passwd = sha256.update(data.passwd + __salt).digest('hex');
             }
-            return this.okupdate(await super.set(data, Account, 'username'));
+            account = await super.set(data, Account, 'username')
+            this.session.account_login = account;
+            return this.okupdate(App.filter(account, this.saftKey));
         } catch (err) {
             if (err.isdefine) throw (err);
             throw (this.error.db(err));
