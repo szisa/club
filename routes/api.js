@@ -18,6 +18,7 @@ router.use(require('./access'));
 router.use('/lib', require('./lib'));
 router.use('/account', loader(modules.account));
 router.use('/club', loader(modules.club));
+router.use('/join', loader(modules.join));
 
 router.get('/', function (req, res) {
     res.render('index', { title: 'API' });
