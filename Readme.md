@@ -30,9 +30,8 @@
 8. script - 脚本  
 
 # 数据库部署说明
-1. 新建数据库`db`（以`config.json`内配置的数据库为准）；  
-2. 修改`model`中的`config.json`的数据库链接信息；  
-3. 执行`npm run initdb`；
+1. 新建数据库`club`（以`config.json`内配置的数据库为准）
+3. 执行`npm run initdb`并根据提示填写数据库连接信息；
 4. 若需要重置某个表，如：重置`account`表，则执行`npm run initdb -- account`。
 
 # 调试说明
