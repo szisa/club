@@ -41,6 +41,7 @@ public/dist
 # env js
 env.js
 
+# upload directory
 upload/
 
 # db config
