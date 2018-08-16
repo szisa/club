@@ -17,5 +17,12 @@
         "upload": "/public/upload/",
         "fileurl": "upload/",
         "maxSize": 5
+    },
+    "db": {
+        "database": "club",
+        "dialect": "mysql",
+        "prefix": "club_",
+        "port": 3306,
+        "logging": true
     }
 }

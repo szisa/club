@@ -7,34 +7,28 @@ if (!fs.existsSync(path.join(__dirname, '../model/config.json'))) {
         input:process.stdin,
         output:process.stdout
     });
-    let config = {
+    let config = Object.assign({
         host: "",
         user: "",
-        password: "",
-        database: "club",
-        port: 3306,
-        dialect: "mysql",
-        prefix: "club_",
-        logging: true
-    }
+        password: ""
+    }, require('../config').db)
     function input (key, callback) {
-        rl.question(`${key}: `,function(val){
-            config[key] = val;
-            if (callback) callback();
-        });
+        return () => {
+            rl.question(`${key}: `,function(val){
+                config[key] = val;
+                if (callback) callback();
+            });
+        }
     }
-    input('host', () => {
-        input ('user', () => {
-            input('password', () => {
-                fs.writeFile(path.join(__dirname, '../model/config.json'), 
-                JSON.stringify({db: config}), (err) => {
-                    if (err) console.log (`create db config failed: ${err.message}`);
-                    else main()
-                })
-                rl.close();
-            })
+    function callback () {
+        fs.writeFile(path.join(__dirname, '../model/config.json'), 
+        JSON.stringify({db: config}), (err) => {
+            if (err) console.log (`create db config failed: ${err.message}`);
+            else main()
         })
-    })
+        rl.close();
+    }
+    input('host', input('user', input('password', callback)))()
 } else {
     main()
 }
